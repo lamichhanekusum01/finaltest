@@ -42,7 +42,16 @@
                     cell.appendChild(document.createTextNode((i+1) + "*" + (j+1)));
                 }
             }
-            
+             // Clear existing table if any
+			 var existingTable = document.querySelector("table");
+			 if (existingTable) {
+				 existingTable.parentNode.removeChild(existingTable);
+			 }
+			 
+			 document.body.appendChild(table); // Append the new table
+		 }
+		 
+		
                </script>
 </body>
 </html>
