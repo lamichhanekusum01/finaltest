@@ -29,28 +29,56 @@
     <button id="b3" onclick="addRow()">Add Row</button>
         
     <script>
-        function generateTable() {
-            var rows = parseInt(document.getElementById("t1").value);
-            var cols = parseInt(document.getElementById("t2").value);
-            
-            var table = document.createElement("table");
-            
-            for (var i = 0; i < rows; i++) {
-                var row = table.insertRow();
-                for (var j = 0; j < cols; j++) {
-                    var cell = row.insertCell();
-                    cell.appendChild(document.createTextNode((i+1) + "*" + (j+1)));
-                }
-            }
-             // Clear existing table if any
-			 var existingTable = document.querySelector("table");
-			 if (existingTable) {
-				 existingTable.parentNode.removeChild(existingTable);
-			 }
-			 
-			 document.body.appendChild(table); // Append the new table
-		 }
-		 
+		function generateTable() {
+			var rows = parseInt(document.getElementById("t1").value);
+			var cols = parseInt(document.getElementById("t2").value);
+		
+			// Check if either rows or columns is 0
+			if (rows === 0 || cols === 0) {
+				alert("Rows or columns cannot be 0. Please enter valid values.");
+				return; // Exit the function if either rows or columns is 0
+			}
+		
+			var table = document.createElement("table");
+		
+			for (var i = 0; i < rows; i++) {
+				var row = table.insertRow();
+				for (var j = 0; j < cols; j++) {
+					var cell = row.insertCell();
+					cell.appendChild(document.createTextNode((i + 1) + "*" + (j + 1)));
+				}
+			}
+		
+			// Clear existing table if any
+			var existingTable = document.querySelector("table");
+			if (existingTable) {
+				existingTable.parentNode.removeChild(existingTable);
+			}
+		
+			document.body.appendChild(table); // Append the new table
+		}
+		
+		 function addColumn() {
+			var table = document.querySelector("table");
+			var rows = table.rows;
+			
+			for (var i = 0; i < rows.length; i++) {
+				var cell = rows[i].insertCell();
+				cell.appendChild(document.createTextNode((i+1) + "*" + (rows[i].cells.length)));
+			}
+		}
+		
+		function addRow() {
+			var table = document.querySelector("table");
+			var cols = table.rows[0].cells.length;
+			var row = table.insertRow();
+			
+			for (var i = 0; i < cols; i++) {
+				var cell = row.insertCell();
+				cell.appendChild(document.createTextNode((table.rows.length) + "*" + (i+1)));
+			}
+		}
+
 		
                </script>
 </body>
